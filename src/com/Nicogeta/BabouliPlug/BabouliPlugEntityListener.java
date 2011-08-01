@@ -19,24 +19,24 @@ public class BabouliPlugEntityListener extends EntityListener{
 		String pName = plugin.player.getName();
 		if(plugin.bossId == entityWhoDiedId) {
 			plugin.player.sendMessage(ChatColor.RED +"INFO: " + ChatColor.GREEN + "GG " + pName + " !");
-			extenguishMethod(theWorld);
+			extinguishMethod(theWorld);
 		}
 	}
 
-	public void extenguishMethod(World theWorld) {
+	public void extinguishMethod(World theWorld) {
 		Material blockToCheck;
 		int x = 32;
 		int y = 111;
 		int z = 394;
 
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			int yChanger = i;
 			for(int j = 0; j < 39; j++) {
 				int zChanger = j;
 				for(int k = 0; k < 48; k++) {
 					blockToCheck = theWorld.getBlockAt(x -  k, y - yChanger, z + zChanger).getType();
-					if(blockToCheck == Material.AIR) {
-						theWorld.getBlockAt(x - k, y - yChanger, z + zChanger).setType(Material.WOOL);
+					if(blockToCheck == Material.FIRE) {
+						theWorld.getBlockAt(x - k, y - yChanger, z + zChanger).setType(Material.AIR);
 					}
 				}
 			}
