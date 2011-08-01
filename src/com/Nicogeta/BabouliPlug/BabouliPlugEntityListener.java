@@ -25,16 +25,18 @@ public class BabouliPlugEntityListener extends EntityListener{
 
 	public void extenguishMethod(World theWorld) {
 		Material blockToCheck;
-		int x = 31;
+		int x = 32;
 		int y = 111;
 		int z = 394;
 
 		for(int i = 0; i < 4; i++) {
+			int yChanger = i;
 			for(int j = 0; j < 39; j++) {
-				for(int k = 0; k < 47; k++) {
-					blockToCheck = theWorld.getBlockAt(x -  k, y, z).getType();
+				int zChanger = j;
+				for(int k = 0; k < 48; k++) {
+					blockToCheck = theWorld.getBlockAt(x -  k, y - yChanger, z + zChanger).getType();
 					if(blockToCheck == Material.AIR) {
-						theWorld.getBlockAt(x - k, y, z).setType(Material.WOOL);
+						theWorld.getBlockAt(x - k, y - yChanger, z + zChanger).setType(Material.WOOL);
 					}
 				}
 			}
