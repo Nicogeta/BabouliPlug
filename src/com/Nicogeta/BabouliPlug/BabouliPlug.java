@@ -17,10 +17,10 @@ public class BabouliPlug extends JavaPlugin {
 	private final BabouliPlugPlayerListener playerListener = new BabouliPlugPlayerListener(this);
 	private final BabouliPlugEntityListener entityListener = new BabouliPlugEntityListener(this);
 
-	public int bossId;
+	public int bossId = 0;
 	public World world;
 	public Player player;
-	public Boolean tpState;
+	public Boolean tpState = false;
 	public Block woolBlock;
 
 
