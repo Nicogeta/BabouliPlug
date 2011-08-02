@@ -19,6 +19,8 @@ public class BabouliPlug extends JavaPlugin {
 	public int bossId;
 	public World world;
 	public Player player;
+	public Boolean tpState;
+
 
 	private PluginDescriptionFile info;
 
@@ -33,7 +35,5 @@ public class BabouliPlug extends JavaPlugin {
 	public void onDisable() {
 		log.info(info.getName() + " DISABLED");
 	}
-
-
 
 }
