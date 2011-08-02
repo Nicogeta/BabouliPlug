@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
@@ -26,6 +27,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 		plugin.world = plugin.player.getWorld();
 		Location loc = event.getPlayer().getLocation();
 		final Entity boss;
+		plugin.woolBlock = plugin.world.getBlockAt(new Location(plugin.world, 11, 107, 413));
 
 		/* Téléportations escaliers au Premier Etage */
 		Location pos1a = new Location(plugin.world, -3, 72, 416);
@@ -42,6 +44,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 
 		/* Téléportations escaliers au Troisième Etage */
 		Location pos3a = new Location(plugin.world, 16, 101, 423);
+		Location pos3b = new Location(plugin.world, 11, 103, 415);
 
 		/* Téléportations escaliers sur le toit */
 		Location pos4a = new Location(plugin.world, 11, 108, 413);
@@ -286,8 +289,10 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 			if (x == 16.5 && z == 421.5) {
 				plugin.player.teleport(pos2e);
 			}
-		} else if (y == 103) {				//Toit
+		} else if (y == 103) {				//Troisième étage pour aller sur le Toit
 			if (x == 11.5 && z == 413.5) {
+				plugin.woolBlock.setType(Material.WOOD);
+				plugin.tpState = false;
 				plugin.player.teleport(pos4a);
 				boss = plugin.world.spawnCreature(pop, CreatureType.GHAST);
 				plugin.bossId = boss.getEntityId();
@@ -302,7 +307,17 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 					}
 				}, 0, 30);
 			}
-		}		
+		} else if (y == 108) {
+			if(x == 11.5 && z == 413.5) {
+				if(plugin.tpState == true) {
+					plugin.player.teleport(pos3b);
+					plugin.woolBlock.setType(Material.WOOD);
+				} else {
+					plugin.player.sendMessage("Nope, la téléportation marchera pas ! tpState: false");
+				}
+				plugin.player.sendMessage("Tu marches sur la wool, mais c'est tout !");
+			}
+		}
 	}
 
 	public void bossTeleportations(Entity boss, World world) {

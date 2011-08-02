@@ -1,11 +1,14 @@
 package com.Nicogeta.BabouliPlug;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
+import org.bukkit.material.Wool;
 
 public class BabouliPlugEntityListener extends EntityListener{
 	final BabouliPlug plugin;
@@ -16,12 +19,21 @@ public class BabouliPlugEntityListener extends EntityListener{
 
 	public void onEntityDeath(EntityDeathEvent event) {
 		int entityWhoDiedId = event.getEntity().getEntityId();
-		World theWorld = plugin.world;
+		final World theWorld = plugin.world;
 		String pName = plugin.player.getName();
 		if(plugin.bossId == entityWhoDiedId) {
 			System.out.println("INFO: boss died, it works !");
 			plugin.player.sendMessage(ChatColor.RED +"INFO: " + ChatColor.GREEN + "GG " + pName + " !");
-			extinguishMethod(theWorld);
+			plugin.woolBlock.setType(Material.WOOL);
+			Wool woolData = (Wool)plugin.woolBlock.getState().getData();
+			woolData.setColor(DyeColor.BLACK);
+			plugin.woolBlock.setData(woolData.getData());
+			plugin.tpState = true;
+			Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable() {
+				public void run() {
+					extinguishMethod(theWorld);
+				}
+			}, 100);		
 		}
 	}
 

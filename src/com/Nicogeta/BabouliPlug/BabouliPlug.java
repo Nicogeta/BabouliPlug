@@ -3,6 +3,7 @@ package com.Nicogeta.BabouliPlug;
 import java.util.logging.Logger;
 
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
@@ -20,6 +21,7 @@ public class BabouliPlug extends JavaPlugin {
 	public World world;
 	public Player player;
 	public Boolean tpState;
+	public Block woolBlock;
 
 
 	private PluginDescriptionFile info;
