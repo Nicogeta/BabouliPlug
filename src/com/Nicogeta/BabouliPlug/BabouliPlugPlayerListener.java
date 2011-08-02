@@ -312,10 +312,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				if(plugin.tpState == true) {
 					plugin.player.teleport(pos3b);
 					plugin.woolBlock.setType(Material.WOOD);
-				} else {
-					plugin.player.sendMessage("Nope, la téléportation marchera pas ! tpState: false");
 				}
-				plugin.player.sendMessage("Tu marches sur la wool, mais c'est tout !");
 			}
 		}
 	}
