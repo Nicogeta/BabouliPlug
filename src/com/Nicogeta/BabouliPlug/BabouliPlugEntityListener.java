@@ -21,12 +21,13 @@ public class BabouliPlugEntityListener extends EntityListener{
 
 	public void onEntityDeath(EntityDeathEvent event) {
 		int entityWhoDiedId = event.getEntity().getEntityId();
-		final World theWorld = plugin.world;
-		String pName = plugin.player.getName();
-		plugin.treasureEntryDoorBlockTop = plugin.world.getBlockAt(new Location(plugin.world, 14, 102, 412));
-		plugin.treasureEntryDoorBlockDown = plugin.world.getBlockAt(new Location(plugin.world, 14, 101, 412));
-
 		if(plugin.bossId == entityWhoDiedId) {
+			final World theWorld = plugin.world;
+			String pName = plugin.player.getName();
+
+			plugin.treasureEntryDoorBlockTop = plugin.world.getBlockAt(new Location(plugin.world, 14, 102, 412));
+			plugin.treasureEntryDoorBlockDown = plugin.world.getBlockAt(new Location(plugin.world, 14, 101, 412));
+
 			System.out.println("INFO: boss died, it works !");
 			plugin.player.sendMessage(ChatColor.RED +"INFO: " + ChatColor.GREEN + "GG " + pName + " !");
 			plugin.woolBlock.setType(Material.WOOL);

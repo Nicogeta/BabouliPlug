@@ -9,8 +9,11 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.material.Door;
 
 //@SuppressWarnings("unused")
 
@@ -293,6 +296,21 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				plugin.player.teleport(pos2e);
 			} else if (x == 18.5 && z == 408.5) {
 				plugin.player.teleport(pos9a);
+				plugin.treasureExitDoorDataTop = (Door)plugin.treasureExitDoorBlockTop.getState().getData();
+				plugin.treasureExitDoorDataDown = (Door)plugin.treasureExitDoorBlockDown.getState().getData();
+				plugin.treasureExitDoorDataTop.setOpen(false);
+				plugin.treasureExitDoorDataDown.setOpen(false);
+				plugin.treasureExitDoorBlockTop.setData(plugin.treasureExitDoorDataTop.getData());
+				plugin.treasureExitDoorBlockDown.setData(plugin.treasureExitDoorDataDown.getData());
+			} else if (x == 14.5 && z == 411.5) {
+				plugin.treasureEntryDoorDataTop = (Door)plugin.treasureEntryDoorBlockTop.getState().getData();
+				plugin.treasureEntryDoorDataDown = (Door)plugin.treasureEntryDoorBlockDown.getState().getData();
+				if(plugin.treasureEntryDoorDataTop.isOpen()) {
+					plugin.treasureEntryDoorDataTop.setOpen(false);
+					plugin.treasureEntryDoorDataDown.setOpen(false);
+					plugin.treasureEntryDoorBlockTop.setData(plugin.treasureEntryDoorDataTop.getData());
+					plugin.treasureEntryDoorBlockDown.setData(plugin.treasureEntryDoorDataDown.getData());
+				}
 			}
 		} else if (y == 103) {				//Troisième étage pour aller sur le Toit
 			if (x == 11.5 && z == 413.5) {
@@ -322,6 +340,30 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				}
 			}
 		}
+	}
+
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		Action action = event.getAction();
+		if(action == Action.RIGHT_CLICK_BLOCK) {
+			Location finalChestOneLoc = new Location(plugin.world, 13, 101, 406);
+			Location finalChestTwoLoc = new Location(plugin.world, 14, 101, 406);
+			plugin.clickedBlock = event.getClickedBlock();
+			plugin.clickedChestBlockLoc = event.getClickedBlock().getLocation();
+			plugin.treasureExitDoorBlockTop = plugin.world.getBlockAt(18, 101, 408);
+			plugin.treasureExitDoorBlockDown = plugin.world.getBlockAt(18, 102, 408);
+
+			if(plugin.clickedBlock.getType() == Material.CHEST) {
+				if(plugin.clickedChestBlockLoc.equals(finalChestOneLoc) || plugin.clickedChestBlockLoc.equals(finalChestTwoLoc)) {
+					plugin.treasureExitDoorDataTop = (Door)plugin.treasureExitDoorBlockTop.getState().getData();
+					plugin.treasureExitDoorDataDown = (Door)plugin.treasureExitDoorBlockDown.getState().getData();
+					plugin.treasureExitDoorDataTop.setOpen(true);
+					plugin.treasureExitDoorDataDown.setOpen(true);
+					plugin.treasureExitDoorBlockTop.setData(plugin.treasureExitDoorDataTop.getData());
+					plugin.treasureExitDoorBlockDown.setData(plugin.treasureExitDoorDataDown.getData());
+				}
+			}
+		}
+
 	}
 
 	public void bossTeleportations(Entity boss, World world) {

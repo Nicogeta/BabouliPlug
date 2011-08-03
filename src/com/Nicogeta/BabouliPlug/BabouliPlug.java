@@ -2,6 +2,7 @@ package com.Nicogeta.BabouliPlug;
 
 import java.util.logging.Logger;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -23,6 +24,9 @@ public class BabouliPlug extends JavaPlugin {
 	public Player player;
 	public Boolean tpState = false;
 	public Block woolBlock;
+	public Block clickedBlock;
+	public Location clickedChestBlockLoc;
+	public Block finalChestBlockOne, finalChestBlockTwo;
 	public Block treasureExitDoorBlockTop, treasureExitDoorBlockDown;
 	public Block treasureEntryDoorBlockTop, treasureEntryDoorBlockDown;
 	public Door treasureEntryDoorDataTop, treasureEntryDoorDataDown;
@@ -36,6 +40,7 @@ public class BabouliPlug extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
 		pm.registerEvent(Event.Type.ENTITY_DEATH, entityListener, Priority.Normal, this);
+		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 		log.info(info.getName()+ info.getVersion() + " ENABLED (by Nicogeta)");
 	}
 
