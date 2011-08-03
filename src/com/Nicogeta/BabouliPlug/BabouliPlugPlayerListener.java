@@ -101,6 +101,9 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 		/* Téléportations sur mur d'enceinte interieur */
 		Location pos8a = new Location(plugin.world, 26, 77, 418);
 
+		/* Téléportations à l'extérieur du donj */
+		Location pos9a = new Location(plugin.world, 3, 70, 433);
+
 		/* Endroit de pop des mobs */
 		Location pop = new Location(plugin.world, -3, 80, 475);
 
@@ -288,6 +291,8 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 		} else if (y == 101) {				//Troisième étage
 			if (x == 16.5 && z == 421.5) {
 				plugin.player.teleport(pos2e);
+			} else if (x == 18.5 && z == 408.5) {
+				plugin.player.teleport(pos9a);
 			}
 		} else if (y == 103) {				//Troisième étage pour aller sur le Toit
 			if (x == 11.5 && z == 413.5) {
@@ -313,6 +318,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 					plugin.player.teleport(pos3b);
 					plugin.woolBlock.setType(Material.WOOD);
 					plugin.tpState = false;
+					plugin.player.playEffect(pos3b, Effect.DOOR_TOGGLE, 1);
 				}
 			}
 		}

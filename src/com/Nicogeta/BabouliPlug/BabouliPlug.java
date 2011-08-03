@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
+import org.bukkit.material.Door;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +23,10 @@ public class BabouliPlug extends JavaPlugin {
 	public Player player;
 	public Boolean tpState = false;
 	public Block woolBlock;
+	public Block treasureExitDoorBlockTop, treasureExitDoorBlockDown;
+	public Block treasureEntryDoorBlockTop, treasureEntryDoorBlockDown;
+	public Door treasureEntryDoorDataTop, treasureEntryDoorDataDown;
+	public Door treasureExitDoorDataTop, treasureExitDoorDataDown;
 
 
 	private PluginDescriptionFile info;

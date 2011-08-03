@@ -3,11 +3,13 @@ package com.Nicogeta.BabouliPlug;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
+import org.bukkit.material.Door;
 import org.bukkit.material.Wool;
 
 public class BabouliPlugEntityListener extends EntityListener{
@@ -21,6 +23,9 @@ public class BabouliPlugEntityListener extends EntityListener{
 		int entityWhoDiedId = event.getEntity().getEntityId();
 		final World theWorld = plugin.world;
 		String pName = plugin.player.getName();
+		plugin.treasureEntryDoorBlockTop = plugin.world.getBlockAt(new Location(plugin.world, 14, 102, 412));
+		plugin.treasureEntryDoorBlockDown = plugin.world.getBlockAt(new Location(plugin.world, 14, 101, 412));
+
 		if(plugin.bossId == entityWhoDiedId) {
 			System.out.println("INFO: boss died, it works !");
 			plugin.player.sendMessage(ChatColor.RED +"INFO: " + ChatColor.GREEN + "GG " + pName + " !");
@@ -29,12 +34,21 @@ public class BabouliPlugEntityListener extends EntityListener{
 			woolData.setColor(DyeColor.BLACK);
 			plugin.woolBlock.setData(woolData.getData());
 			plugin.tpState = true;
+
+			plugin.treasureEntryDoorDataTop = (Door)plugin.treasureEntryDoorBlockTop.getState().getData();
+			plugin.treasureEntryDoorDataDown = (Door)plugin.treasureEntryDoorBlockDown.getState().getData();
+			plugin.treasureEntryDoorDataTop.setOpen(true);
+			plugin.treasureEntryDoorDataDown.setOpen(true);
+			plugin.treasureEntryDoorBlockTop.setData(plugin.treasureEntryDoorDataTop.getData());
+			plugin.treasureEntryDoorBlockDown.setData(plugin.treasureEntryDoorDataDown.getData());
+
 			Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable() {
 				public void run() {
 					extinguishMethod(theWorld);
 				}
 			}, 100);		
 		}
+
 	}
 
 	public void extinguishMethod(World theWorld) {
