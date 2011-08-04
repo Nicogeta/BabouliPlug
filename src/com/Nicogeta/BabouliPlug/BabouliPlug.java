@@ -26,6 +26,7 @@ public class BabouliPlug extends JavaPlugin {
 	public Block woolBlock;
 	public Block clickedBlock;
 	public Location clickedChestBlockLoc;
+	public Location exitDoorLoc, entryDoorLoc;
 	public Block finalChestBlockOne, finalChestBlockTwo;
 	public Block treasureExitDoorBlockTop, treasureExitDoorBlockDown;
 	public Block treasureEntryDoorBlockTop, treasureEntryDoorBlockDown;

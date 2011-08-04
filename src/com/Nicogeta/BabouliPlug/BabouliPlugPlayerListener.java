@@ -296,13 +296,20 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				plugin.player.teleport(pos2e);
 			} else if (x == 18.5 && z == 408.5) {
 				plugin.player.teleport(pos9a);
+				plugin.exitDoorLoc = new Location(plugin.world, 18, 102, 408);
+				plugin.treasureExitDoorBlockTop = plugin.world.getBlockAt(18, 101, 408);
+				plugin.treasureExitDoorBlockDown = plugin.world.getBlockAt(18, 102, 408);
 				plugin.treasureExitDoorDataTop = (Door)plugin.treasureExitDoorBlockTop.getState().getData();
 				plugin.treasureExitDoorDataDown = (Door)plugin.treasureExitDoorBlockDown.getState().getData();
 				plugin.treasureExitDoorDataTop.setOpen(false);
 				plugin.treasureExitDoorDataDown.setOpen(false);
 				plugin.treasureExitDoorBlockTop.setData(plugin.treasureExitDoorDataTop.getData());
 				plugin.treasureExitDoorBlockDown.setData(plugin.treasureExitDoorDataDown.getData());
+				plugin.world.playEffect(plugin.exitDoorLoc, Effect.DOOR_TOGGLE, 1);
 			} else if (x == 14.5 && z == 411.5) {
+				plugin.entryDoorLoc = new Location(plugin.world, 14, 102, 412);
+				plugin.treasureEntryDoorBlockTop = plugin.world.getBlockAt(new Location(plugin.world, 14, 102, 412));
+				plugin.treasureEntryDoorBlockDown = plugin.world.getBlockAt(new Location(plugin.world, 14, 101, 412));
 				plugin.treasureEntryDoorDataTop = (Door)plugin.treasureEntryDoorBlockTop.getState().getData();
 				plugin.treasureEntryDoorDataDown = (Door)plugin.treasureEntryDoorBlockDown.getState().getData();
 				if(plugin.treasureEntryDoorDataTop.isOpen()) {
@@ -310,6 +317,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 					plugin.treasureEntryDoorDataDown.setOpen(false);
 					plugin.treasureEntryDoorBlockTop.setData(plugin.treasureEntryDoorDataTop.getData());
 					plugin.treasureEntryDoorBlockDown.setData(plugin.treasureEntryDoorDataDown.getData());
+					plugin.world.playEffect(plugin.entryDoorLoc, Effect.DOOR_TOGGLE, 1);
 				}
 			}
 		} else if (y == 103) {				//Troisième étage pour aller sur le Toit
@@ -344,6 +352,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Action action = event.getAction();
+		plugin.exitDoorLoc = new Location(plugin.world, 18, 102, 408);
 		if(action == Action.RIGHT_CLICK_BLOCK) {
 			Location finalChestOneLoc = new Location(plugin.world, 13, 101, 406);
 			Location finalChestTwoLoc = new Location(plugin.world, 14, 101, 406);
@@ -356,10 +365,13 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				if(plugin.clickedChestBlockLoc.equals(finalChestOneLoc) || plugin.clickedChestBlockLoc.equals(finalChestTwoLoc)) {
 					plugin.treasureExitDoorDataTop = (Door)plugin.treasureExitDoorBlockTop.getState().getData();
 					plugin.treasureExitDoorDataDown = (Door)plugin.treasureExitDoorBlockDown.getState().getData();
-					plugin.treasureExitDoorDataTop.setOpen(true);
-					plugin.treasureExitDoorDataDown.setOpen(true);
-					plugin.treasureExitDoorBlockTop.setData(plugin.treasureExitDoorDataTop.getData());
-					plugin.treasureExitDoorBlockDown.setData(plugin.treasureExitDoorDataDown.getData());
+					if(!plugin.treasureExitDoorDataTop.isOpen()) {
+						plugin.treasureExitDoorDataTop.setOpen(true);
+						plugin.treasureExitDoorDataDown.setOpen(true);
+						plugin.treasureExitDoorBlockTop.setData(plugin.treasureExitDoorDataTop.getData());
+						plugin.treasureExitDoorBlockDown.setData(plugin.treasureExitDoorDataDown.getData());
+						plugin.world.playEffect(plugin.exitDoorLoc, Effect.DOOR_TOGGLE, 1);
+					}
 				}
 			}
 		}
