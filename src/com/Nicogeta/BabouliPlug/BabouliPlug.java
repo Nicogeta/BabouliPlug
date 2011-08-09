@@ -23,15 +23,19 @@ public class BabouliPlug extends JavaPlugin {
 	public World world;
 	public Player player;
 	public Boolean tpState = false;
+	//public Location clickedBlockLoc;
+	public Location treasureExitDoorLoc, treasureEntryDoorLoc, bossDoorLoc;
+
 	public Block woolBlock;
-	public Block clickedBlock;
-	public Location clickedChestBlockLoc;
-	public Location exitDoorLoc, entryDoorLoc;
+	//public Block clickedBlock;
 	public Block finalChestBlockOne, finalChestBlockTwo;
+	public Block bossDoorBlockTop, bossDoorBlockDown;
 	public Block treasureExitDoorBlockTop, treasureExitDoorBlockDown;
 	public Block treasureEntryDoorBlockTop, treasureEntryDoorBlockDown;
+
 	public Door treasureEntryDoorDataTop, treasureEntryDoorDataDown;
 	public Door treasureExitDoorDataTop, treasureExitDoorDataDown;
+	public Door bossDoorDataTop, bossDoorDataDown;
 
 
 	private PluginDescriptionFile info;

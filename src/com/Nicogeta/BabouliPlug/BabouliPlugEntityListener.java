@@ -43,7 +43,7 @@ public class BabouliPlugEntityListener extends EntityListener{
 			plugin.treasureEntryDoorBlockTop.setData(plugin.treasureEntryDoorDataTop.getData());
 			plugin.treasureEntryDoorBlockDown.setData(plugin.treasureEntryDoorDataDown.getData());
 
-			Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable() {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				public void run() {
 					extinguishMethod(theWorld);
 				}
