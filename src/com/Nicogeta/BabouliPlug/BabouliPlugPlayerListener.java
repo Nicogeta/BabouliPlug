@@ -22,7 +22,6 @@ import org.bukkit.material.Door;
 public class BabouliPlugPlayerListener extends PlayerListener {
 	final BabouliPlug plugin;
 
-
 	public BabouliPlugPlayerListener(BabouliPlug instance) {
 		plugin = instance;
 	}
@@ -314,7 +313,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 				boss.setHealth(100);
 				System.out.println("entityId du boss: " + plugin.bossId);
 				boss.teleport(bossA);
-				plugin.player.sendMessage(ChatColor.RED + "BOSS: MOUAAHHAHAHAHAHAHAHAH !");
+				plugin.player.sendMessage(ChatColor.RED + "BOSS:  "+ ChatColor.GREEN + "MOUAAHHAHAHAHAHAHAHAH !");
 				plugin.player.playEffect(pos4a, Effect.DOOR_TOGGLE, 1);
 				Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, 
 						new Runnable() {
@@ -363,6 +362,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 			if (clickedBlockLoc.equals(doorToBossDown) || clickedBlockLoc.equals(doorToBossTop)) {
 				if (itemInHand.equals(Material.STICK)) {
 					if(!doorState(11, 103, 413)) {
+						event.getPlayer().getInventory().remove(itemInHand);
 						openCloseDoors(11, 103, 413, true, false, true);
 					}
 				}
@@ -392,7 +392,7 @@ public class BabouliPlugPlayerListener extends PlayerListener {
 		}
 	}
 
-	public boolean doorState(int xOfTheDoor, int yOfTheDoor, int zOfTheDoor) {
+	private boolean doorState(int xOfTheDoor, int yOfTheDoor, int zOfTheDoor) {
 		Block doorToCheckStateBlock = plugin.world.getBlockAt(xOfTheDoor, yOfTheDoor, zOfTheDoor);
 		Door doorToCheckStateData = (Door) doorToCheckStateBlock.getState().getData();
 		if(doorToCheckStateData.isOpen()) {

@@ -23,11 +23,10 @@ public class BabouliPlug extends JavaPlugin {
 	public World world;
 	public Player player;
 	public Boolean tpState = false;
-	//public Location clickedBlockLoc;
+
 	public Location treasureExitDoorLoc, treasureEntryDoorLoc, bossDoorLoc;
 
 	public Block woolBlock;
-	//public Block clickedBlock;
 	public Block finalChestBlockOne, finalChestBlockTwo;
 	public Block bossDoorBlockTop, bossDoorBlockDown;
 	public Block treasureExitDoorBlockTop, treasureExitDoorBlockDown;

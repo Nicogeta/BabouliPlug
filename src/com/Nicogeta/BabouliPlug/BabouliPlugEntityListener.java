@@ -29,7 +29,8 @@ public class BabouliPlugEntityListener extends EntityListener{
 			plugin.treasureEntryDoorBlockDown = plugin.world.getBlockAt(new Location(plugin.world, 14, 101, 412));
 
 			System.out.println("INFO: boss died, it works !");
-			plugin.player.sendMessage(ChatColor.RED +"INFO: " + ChatColor.GREEN + "GG " + pName + " !");
+			plugin.player.sendMessage(ChatColor.RED + "INFO: " + ChatColor.GREEN + "GG " + pName + " !");
+			plugin.player.sendMessage(ChatColor.RED + "INFO: " + ChatColor.GREEN + "Une trappe vient de s'ouvrir !");
 			plugin.woolBlock.setType(Material.WOOL);
 			Wool woolData = (Wool)plugin.woolBlock.getState().getData();
 			woolData.setColor(DyeColor.BLACK);
